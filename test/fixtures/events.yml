@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  recruiter_id: 1
+  event_date: 2021-09-27 11:56:21
+  location: MyText
+  description: MyText
+  name: MyString
+  image: MyText
+
+two:
+  recruiter_id: 1
+  event_date: 2021-09-27 11:56:21
+  location: MyText
+  description: MyText
+  name: MyString
+  image: MyText

@@ -1,0 +1,333 @@
+  [1m[35m (375.1ms)[0m  [1m[35mCREATE DATABASE "skillmatch_development" ENCODING = 'unicode'[0m
+  [1m[35m (226.3ms)[0m  [1m[35mCREATE DATABASE "skillmatch_test" ENCODING = 'unicode'[0m
+  [1m[35m (20.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (21.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7574664476421796950)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateAddEvents (20210927185417)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.7ms)[0m  [1m[35mCREATE TABLE "add_events" ("id" bigserial primary key, "event_id" integer, "job_seeker_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210927185417"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEvents (20210927185621)
+  [1m[36mTRANSACTION (7.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (17.7ms)[0m  [1m[35mCREATE TABLE "events" ("id" bigserial primary key, "recruiter_id" integer, "event_date" timestamp, "location" text, "description" text, "name" character varying, "image" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210927185621"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateJobSeekers (20210927185745)
+  [1m[36mTRANSACTION (5.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (16.2ms)[0m  [1m[35mCREATE TABLE "job_seekers" ("id" bigserial primary key, "name" character varying, "location" text, "username" character varying, "password" character varying, "email" character varying, "image" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210927185745"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProfiles (20210927190028)
+  [1m[36mTRANSACTION (6.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (33.9ms)[0m  [1m[35mCREATE TABLE "profiles" ("id" bigserial primary key, "user_id" integer, "user_type" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210927190028"]]
+  [1m[36mTRANSACTION (11.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateRecruiters (20210927190129)
+  [1m[36mTRANSACTION (6.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (22.0ms)[0m  [1m[35mCREATE TABLE "recruiters" ("id" bigserial primary key, "name" character varying, "company_name" character varying, "location" text, "username" character varying, "password" character varying, "email" character varying, "logo" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210927190129"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSkills (20210927190222)
+  [1m[36mTRANSACTION (5.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (24.2ms)[0m  [1m[35mCREATE TABLE "skills" ("id" bigserial primary key, "profile_id" integer, "name" character varying, "level" integer, "logo" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210927190222"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (2.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2021-09-27 19:07:47.155157"], ["updated_at", "2021-09-27 19:07:47.155157"]]
+  [1m[36mTRANSACTION (6.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(7574664476421796950)[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mRecruiter Load (0.7ms)[0m  [1m[34mSELECT "recruiters".* FROM "recruiters"[0m
+  [1m[36mJobSeeker Load (0.8ms)[0m  [1m[34mSELECT "job_seekers".* FROM "job_seekers"[0m
+  [1m[36mProfile Load (0.9ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mSkill Load (0.5ms)[0m  [1m[34mSELECT "skills".* FROM "skills"[0m
+  [1m[36mEvent Load (2.3ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  [1m[36mAddEvent Load (6.4ms)[0m  [1m[34mSELECT "add_events".* FROM "add_events"[0m
+  [1m[36mTRANSACTION (8.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRecruiter Create (1.0ms)[0m  [1m[32mINSERT INTO "recruiters" ("name", "company_name", "location", "username", "password", "email", "logo", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "John"], ["company_name", "Microsoft"], ["location", "Seattle, WA"], ["username", "john"], ["password", "123"], ["email", "john@microsoft.com"], ["logo", "https://www.designbust.com/download/1060/png/microsoft_logo_transparent256.png"], ["created_at", "2021-09-27 19:07:47.399750"], ["updated_at", "2021-09-27 19:07:47.399750"]]
+  [1m[36mTRANSACTION (15.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRecruiter Create (0.6ms)[0m  [1m[32mINSERT INTO "recruiters" ("name", "company_name", "location", "username", "password", "email", "logo", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Amanda"], ["company_name", "Facebook"], ["location", "San Francisco, CA"], ["username", "amanda"], ["password", "123"], ["email", "amanda@facebook.com"], ["logo", "https://cdn.iconscout.com/icon/free/png-256/facebook-logo-2019-1597680-1350125.png"], ["created_at", "2021-09-27 19:07:47.430716"], ["updated_at", "2021-09-27 19:07:47.430716"]]
+  [1m[36mTRANSACTION (12.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRecruiter Create (0.5ms)[0m  [1m[32mINSERT INTO "recruiters" ("name", "company_name", "location", "username", "password", "email", "logo", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Hanna"], ["company_name", "Spotify"], ["location", "New York, NY"], ["username", "hanna"], ["password", "123"], ["email", "hanna@spotify.com"], ["logo", "https://cdn.iconscout.com/icon/free/png-256/spotify-11-432546.png"], ["created_at", "2021-09-27 19:07:47.449912"], ["updated_at", "2021-09-27 19:07:47.449912"]]
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRecruiter Create (1.0ms)[0m  [1m[32mINSERT INTO "recruiters" ("name", "company_name", "location", "username", "password", "email", "logo", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Eric"], ["company_name", "Tesla"], ["location", "San Francisco, CA"], ["username", "eric"], ["password", "123"], ["email", "eric@tesla.com"], ["logo", "https://cdn.iconscout.com/icon/free/png-256/tesla-11-569489.png"], ["created_at", "2021-09-27 19:07:47.457455"], ["updated_at", "2021-09-27 19:07:47.457455"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRecruiter Create (3.3ms)[0m  [1m[32mINSERT INTO "recruiters" ("name", "company_name", "location", "username", "password", "email", "logo", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Ali"], ["company_name", "NASA"], ["location", "Houston, TX"], ["username", "ali"], ["password", "123"], ["email", "ali@nasa.com"], ["logo", "https://cdn.iconscout.com/icon/free/png-256/nasa-282190.png"], ["created_at", "2021-09-27 19:07:47.465227"], ["updated_at", "2021-09-27 19:07:47.465227"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mJobSeeker Create (1.3ms)[0m  [1m[32mINSERT INTO "job_seekers" ("name", "location", "username", "password", "email", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Suey"], ["location", "Seattle, WA"], ["username", "suey"], ["password", "123"], ["email", "suey@gmail.com"], ["image", "https://i.pinimg.com/originals/ec/a0/b7/eca0b73553fb07e9393c14c9a67899cb.jpg"], ["created_at", "2021-09-27 19:07:47.490430"], ["updated_at", "2021-09-27 19:07:47.490430"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mJobSeeker Create (0.4ms)[0m  [1m[32mINSERT INTO "job_seekers" ("name", "location", "username", "password", "email", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Joyce"], ["location", "New York, NY"], ["username", "joyce"], ["password", "123"], ["email", "joyce@gmail.com"], ["image", "https://i.pinimg.com/474x/e7/fb/a0/e7fba022757e23074952d1f75910ab4d.jpg"], ["created_at", "2021-09-27 19:07:47.496243"], ["updated_at", "2021-09-27 19:07:47.496243"]]
+  [1m[36mTRANSACTION (17.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mJobSeeker Create (0.3ms)[0m  [1m[32mINSERT INTO "job_seekers" ("name", "location", "username", "password", "email", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Joe"], ["location", "Seattle, WA"], ["username", "alex"], ["password", "123"], ["email", "joy@gmail.com"], ["image", "https://i.pinimg.com/474x/49/e6/8c/49e68cb083f221f877cb8c54df4c2284.jpg"], ["created_at", "2021-09-27 19:07:47.518704"], ["updated_at", "2021-09-27 19:07:47.518704"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mJobSeeker Create (0.3ms)[0m  [1m[32mINSERT INTO "job_seekers" ("name", "location", "username", "password", "email", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Anna"], ["location", "Los Angeles, CA"], ["username", "brianna"], ["password", "123"], ["email", "anna@gmail.com"], ["image", "https://up.quizlet.com/5hmda-sSqCH-256s.jpg"], ["created_at", "2021-09-27 19:07:47.523905"], ["updated_at", "2021-09-27 19:07:47.523905"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (3.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mJobSeeker Create (1.1ms)[0m  [1m[32mINSERT INTO "job_seekers" ("name", "location", "username", "password", "email", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Matt"], ["location", "Houston, TX"], ["username", "angelo"], ["password", "123"], ["email", "matt@gmail.com"], ["image", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQosI4z983JAb5qW1c9LRfCHYTnRj4V7-OiWg&usqp=CAU"], ["created_at", "2021-09-27 19:07:47.528775"], ["updated_at", "2021-09-27 19:07:47.528775"]]
+  [1m[36mTRANSACTION (10.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mJobSeeker Create (2.2ms)[0m  [1m[32mINSERT INTO "job_seekers" ("name", "location", "username", "password", "email", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Jay"], ["location", "San Francisco, CA"], ["username", "seanb"], ["password", "123"], ["email", "joy@gmail.com"], ["image", "https://up.quizlet.com/bq6l2-FW9GY-256s.png"], ["created_at", "2021-09-27 19:07:47.552853"], ["updated_at", "2021-09-27 19:07:47.552853"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRecruiter Load (0.3ms)[0m  [1m[34mSELECT "recruiters".* FROM "recruiters"[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfile Create (0.9ms)[0m  [1m[32mINSERT INTO "profiles" ("user_id", "user_type", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 1], ["user_type", "Recruiter"], ["created_at", "2021-09-27 19:07:47.581445"], ["updated_at", "2021-09-27 19:07:47.581445"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRecruiter Load (0.4ms)[0m  [1m[34mSELECT "recruiters".* FROM "recruiters"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfile Create (0.7ms)[0m  [1m[32mINSERT INTO "profiles" ("user_id", "user_type", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 2], ["user_type", "Recruiter"], ["created_at", "2021-09-27 19:07:47.592394"], ["updated_at", "2021-09-27 19:07:47.592394"]]
+  [1m[36mTRANSACTION (9.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRecruiter Load (1.0ms)[0m  [1m[34mSELECT "recruiters".* FROM "recruiters"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfile Create (0.3ms)[0m  [1m[32mINSERT INTO "profiles" ("user_id", "user_type", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 3], ["user_type", "Recruiter"], ["created_at", "2021-09-27 19:07:47.609527"], ["updated_at", "2021-09-27 19:07:47.609527"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRecruiter Load (4.2ms)[0m  [1m[34mSELECT "recruiters".* FROM "recruiters"[0m
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfile Create (0.9ms)[0m  [1m[32mINSERT INTO "profiles" ("user_id", "user_type", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 4], ["user_type", "Recruiter"], ["created_at", "2021-09-27 19:07:47.620095"], ["updated_at", "2021-09-27 19:07:47.620095"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRecruiter Load (0.3ms)[0m  [1m[34mSELECT "recruiters".* FROM "recruiters"[0m
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfile Create (0.5ms)[0m  [1m[32mINSERT INTO "profiles" ("user_id", "user_type", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 5], ["user_type", "Recruiter"], ["created_at", "2021-09-27 19:07:47.629206"], ["updated_at", "2021-09-27 19:07:47.629206"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mJobSeeker Load (0.2ms)[0m  [1m[34mSELECT "job_seekers".* FROM "job_seekers"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfile Create (0.2ms)[0m  [1m[32mINSERT INTO "profiles" ("user_id", "user_type", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 1], ["user_type", "JobSeeker"], ["created_at", "2021-09-27 19:07:47.639841"], ["updated_at", "2021-09-27 19:07:47.639841"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mJobSeeker Load (0.2ms)[0m  [1m[34mSELECT "job_seekers".* FROM "job_seekers"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfile Create (1.1ms)[0m  [1m[32mINSERT INTO "profiles" ("user_id", "user_type", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 2], ["user_type", "JobSeeker"], ["created_at", "2021-09-27 19:07:47.646100"], ["updated_at", "2021-09-27 19:07:47.646100"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mJobSeeker Load (0.2ms)[0m  [1m[34mSELECT "job_seekers".* FROM "job_seekers"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfile Create (0.2ms)[0m  [1m[32mINSERT INTO "profiles" ("user_id", "user_type", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 3], ["user_type", "JobSeeker"], ["created_at", "2021-09-27 19:07:47.653088"], ["updated_at", "2021-09-27 19:07:47.653088"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mJobSeeker Load (0.2ms)[0m  [1m[34mSELECT "job_seekers".* FROM "job_seekers"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfile Create (0.4ms)[0m  [1m[32mINSERT INTO "profiles" ("user_id", "user_type", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 4], ["user_type", "JobSeeker"], ["created_at", "2021-09-27 19:07:47.660115"], ["updated_at", "2021-09-27 19:07:47.660115"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mJobSeeker Load (0.2ms)[0m  [1m[34mSELECT "job_seekers".* FROM "job_seekers"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfile Create (0.3ms)[0m  [1m[32mINSERT INTO "profiles" ("user_id", "user_type", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 5], ["user_type", "JobSeeker"], ["created_at", "2021-09-27 19:07:47.669667"], ["updated_at", "2021-09-27 19:07:47.669667"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mJobSeeker Load (0.3ms)[0m  [1m[34mSELECT "job_seekers".* FROM "job_seekers"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfile Create (0.4ms)[0m  [1m[32mINSERT INTO "profiles" ("user_id", "user_type", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 6], ["user_type", "JobSeeker"], ["created_at", "2021-09-27 19:07:47.679270"], ["updated_at", "2021-09-27 19:07:47.679270"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.3ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.6ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 1], ["name", "Java"], ["level", 3], ["created_at", "2021-09-27 19:07:47.701877"], ["updated_at", "2021-09-27 19:07:47.701877"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.3ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 1], ["name", "Python"], ["level", 3], ["created_at", "2021-09-27 19:07:47.712507"], ["updated_at", "2021-09-27 19:07:47.712507"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.3ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 1], ["name", "C++"], ["level", 3], ["created_at", "2021-09-27 19:07:47.720811"], ["updated_at", "2021-09-27 19:07:47.720811"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.3ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 2], ["name", "Ruby"], ["level", 3], ["created_at", "2021-09-27 19:07:47.730355"], ["updated_at", "2021-09-27 19:07:47.730355"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.4ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 2], ["name", "Java"], ["level", 3], ["created_at", "2021-09-27 19:07:47.742975"], ["updated_at", "2021-09-27 19:07:47.742975"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.2ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 2], ["name", "C++"], ["level", 3], ["created_at", "2021-09-27 19:07:47.749158"], ["updated_at", "2021-09-27 19:07:47.749158"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.3ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 2], ["name", "JavaScript"], ["level", 3], ["created_at", "2021-09-27 19:07:47.754104"], ["updated_at", "2021-09-27 19:07:47.754104"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.2ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 3], ["name", "Go"], ["level", 3], ["created_at", "2021-09-27 19:07:47.758866"], ["updated_at", "2021-09-27 19:07:47.758866"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.2ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 3], ["name", "Java"], ["level", 3], ["created_at", "2021-09-27 19:07:47.763540"], ["updated_at", "2021-09-27 19:07:47.763540"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.3ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 3], ["name", "C++"], ["level", 3], ["created_at", "2021-09-27 19:07:47.768130"], ["updated_at", "2021-09-27 19:07:47.768130"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.2ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 4], ["name", "Python"], ["level", 3], ["created_at", "2021-09-27 19:07:47.772969"], ["updated_at", "2021-09-27 19:07:47.772969"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.4ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 4], ["name", "Java"], ["level", 3], ["created_at", "2021-09-27 19:07:47.777559"], ["updated_at", "2021-09-27 19:07:47.777559"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.3ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 4], ["name", "TypeScript"], ["level", 3], ["created_at", "2021-09-27 19:07:47.782860"], ["updated_at", "2021-09-27 19:07:47.782860"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.2ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 5], ["name", "Python"], ["level", 3], ["created_at", "2021-09-27 19:07:47.787899"], ["updated_at", "2021-09-27 19:07:47.787899"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.4ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 5], ["name", "Java"], ["level", 3], ["created_at", "2021-09-27 19:07:47.792736"], ["updated_at", "2021-09-27 19:07:47.792736"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.6ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 5], ["name", "C#"], ["level", 3], ["created_at", "2021-09-27 19:07:47.797853"], ["updated_at", "2021-09-27 19:07:47.797853"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.2ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 5], ["name", "JavaScript"], ["level", 3], ["created_at", "2021-09-27 19:07:47.803211"], ["updated_at", "2021-09-27 19:07:47.803211"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.2ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 6], ["name", "Ruby"], ["level", 3], ["created_at", "2021-09-27 19:07:47.808007"], ["updated_at", "2021-09-27 19:07:47.808007"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.2ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 6], ["name", "JavaScript"], ["level", 3], ["created_at", "2021-09-27 19:07:47.812928"], ["updated_at", "2021-09-27 19:07:47.812928"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.3ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.2ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 6], ["name", "Python"], ["level", 3], ["created_at", "2021-09-27 19:07:47.818225"], ["updated_at", "2021-09-27 19:07:47.818225"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.3ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 7], ["name", "Java"], ["level", 3], ["created_at", "2021-09-27 19:07:47.822934"], ["updated_at", "2021-09-27 19:07:47.822934"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.3ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 7], ["name", "JavaScript"], ["level", 3], ["created_at", "2021-09-27 19:07:47.827569"], ["updated_at", "2021-09-27 19:07:47.827569"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.3ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.3ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 7], ["name", "C#"], ["level", 3], ["created_at", "2021-09-27 19:07:47.833092"], ["updated_at", "2021-09-27 19:07:47.833092"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.2ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 8], ["name", "C++"], ["level", 3], ["created_at", "2021-09-27 19:07:47.837930"], ["updated_at", "2021-09-27 19:07:47.837930"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.2ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 8], ["name", "JavaScript"], ["level", 3], ["created_at", "2021-09-27 19:07:47.842536"], ["updated_at", "2021-09-27 19:07:47.842536"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.3ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.4ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 8], ["name", "Go"], ["level", 3], ["created_at", "2021-09-27 19:07:47.847573"], ["updated_at", "2021-09-27 19:07:47.847573"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.3ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.3ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 9], ["name", "Java"], ["level", 3], ["created_at", "2021-09-27 19:07:47.853948"], ["updated_at", "2021-09-27 19:07:47.853948"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.3ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.3ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 9], ["name", "Python"], ["level", 3], ["created_at", "2021-09-27 19:07:47.861021"], ["updated_at", "2021-09-27 19:07:47.861021"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.2ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 9], ["name", "C++"], ["level", 3], ["created_at", "2021-09-27 19:07:47.866572"], ["updated_at", "2021-09-27 19:07:47.866572"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.2ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 10], ["name", "JavaScript"], ["level", 3], ["created_at", "2021-09-27 19:07:47.871250"], ["updated_at", "2021-09-27 19:07:47.871250"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.3ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.3ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 10], ["name", "TypeScript"], ["level", 3], ["created_at", "2021-09-27 19:07:47.877582"], ["updated_at", "2021-09-27 19:07:47.877582"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.3ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.2ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 10], ["name", "Go"], ["level", 3], ["created_at", "2021-09-27 19:07:47.883592"], ["updated_at", "2021-09-27 19:07:47.883592"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.3ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 11], ["name", "C"], ["level", 3], ["created_at", "2021-09-27 19:07:47.888510"], ["updated_at", "2021-09-27 19:07:47.888510"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.3ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 11], ["name", "Java"], ["level", 3], ["created_at", "2021-09-27 19:07:47.893133"], ["updated_at", "2021-09-27 19:07:47.893133"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProfile Load (0.2ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSkill Create (0.2ms)[0m  [1m[32mINSERT INTO "skills" ("profile_id", "name", "level", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["profile_id", 11], ["name", "Python"], ["level", 3], ["created_at", "2021-09-27 19:07:47.898352"], ["updated_at", "2021-09-27 19:07:47.898352"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRecruiter Load (0.2ms)[0m  [1m[34mSELECT "recruiters".* FROM "recruiters"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mEvent Create (0.5ms)[0m  [1m[32mINSERT INTO "events" ("recruiter_id", "event_date", "location", "description", "name", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["recruiter_id", 1], ["event_date", "2021-07-20 18:00:00"], ["location", "Seattle, WA"], ["description", "An evening meetup event with beer"], ["name", "Networking Over Beer"], ["image", "https://lh5.googleusercontent.com/p/AF1QipOOvS3MfpH4Z3wUq3jNc21p5qowyr8_d45V8tjE=w256-h256-k-no-p"], ["created_at", "2021-09-27 19:07:47.911086"], ["updated_at", "2021-09-27 19:07:47.911086"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRecruiter Load (0.3ms)[0m  [1m[34mSELECT "recruiters".* FROM "recruiters"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mEvent Create (0.2ms)[0m  [1m[32mINSERT INTO "events" ("recruiter_id", "event_date", "location", "description", "name", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["recruiter_id", 1], ["event_date", "2021-07-30 11:00:00"], ["location", "Seattle, WA"], ["description", "Let's go grab lunch and talk about code!"], ["name", "Lunch Event"], ["image", "https://media1.fdncms.com/stranger/imager/u/large/27875261/20170730_junebabyforthestranger_0115_mag.png"], ["created_at", "2021-09-27 19:07:47.916990"], ["updated_at", "2021-09-27 19:07:47.916990"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRecruiter Load (0.2ms)[0m  [1m[34mSELECT "recruiters".* FROM "recruiters"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mEvent Create (0.2ms)[0m  [1m[32mINSERT INTO "events" ("recruiter_id", "event_date", "location", "description", "name", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["recruiter_id", 2], ["event_date", "2021-07-22 17:00:00"], ["location", "San Francisco, CA"], ["description", "Coding workshop featuring one of our brilliant Tech Leads"], ["name", "Coding Workshop"], ["image", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZYRCl_HM84qbrNcqVLv9lQaoini3tUTifUQ&usqp=CAU"], ["created_at", "2021-09-27 19:07:47.921674"], ["updated_at", "2021-09-27 19:07:47.921674"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRecruiter Load (0.2ms)[0m  [1m[34mSELECT "recruiters".* FROM "recruiters"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mEvent Create (0.3ms)[0m  [1m[32mINSERT INTO "events" ("recruiter_id", "event_date", "location", "description", "name", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["recruiter_id", 3], ["event_date", "2021-07-25 18:00:00"], ["location", "New York, NY"], ["description", "A relaxing career social event"], ["name", "Relax and Social"], ["image", "https://www.gatewaycityarts.com/wp-content/uploads/2020/06/Judds_Bar-256x256.jpg"], ["created_at", "2021-09-27 19:07:47.926616"], ["updated_at", "2021-09-27 19:07:47.926616"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRecruiter Load (0.2ms)[0m  [1m[34mSELECT "recruiters".* FROM "recruiters"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mEvent Create (0.3ms)[0m  [1m[32mINSERT INTO "events" ("recruiter_id", "event_date", "location", "description", "name", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["recruiter_id", 4], ["event_date", "2021-08-03 12:00:00"], ["location", "San Francisco, CA"], ["description", "Lunch and code"], ["name", "Lunch and Code"], ["image", "https://ravishingradish.com/wp-content/uploads/2019/03/galvanize-1140x680.jpg"], ["created_at", "2021-09-27 19:07:47.931907"], ["updated_at", "2021-09-27 19:07:47.931907"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRecruiter Load (0.2ms)[0m  [1m[34mSELECT "recruiters".* FROM "recruiters"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mEvent Create (0.4ms)[0m  [1m[32mINSERT INTO "events" ("recruiter_id", "event_date", "location", "description", "name", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["recruiter_id", 5], ["event_date", "2021-07-28 17:00:00"], ["location", "Houston, TX"], ["description", "Dinner's on us!"], ["name", "Social Over Dinner"], ["image", "https://res.cloudinary.com/sagacity/image/upload/c_crop,h_4000,w_6000,x_0,y_0/c_limit,dpr_auto,f_auto,fl_lossy,q_80,w_1080/TC2058256_tozbyn.jpg"], ["created_at", "2021-09-27 19:07:47.937474"], ["updated_at", "2021-09-27 19:07:47.937474"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  [1m[36mJobSeeker Load (0.2ms)[0m  [1m[34mSELECT "job_seekers".* FROM "job_seekers"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAddEvent Create (0.8ms)[0m  [1m[32mINSERT INTO "add_events" ("event_id", "job_seeker_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["event_id", 1], ["job_seeker_id", 1], ["created_at", "2021-09-27 19:07:47.953285"], ["updated_at", "2021-09-27 19:07:47.953285"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  [1m[36mJobSeeker Load (0.2ms)[0m  [1m[34mSELECT "job_seekers".* FROM "job_seekers"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAddEvent Create (0.3ms)[0m  [1m[32mINSERT INTO "add_events" ("event_id", "job_seeker_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["event_id", 2], ["job_seeker_id", 1], ["created_at", "2021-09-27 19:07:47.960319"], ["updated_at", "2021-09-27 19:07:47.960319"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  [1m[36mJobSeeker Load (0.2ms)[0m  [1m[34mSELECT "job_seekers".* FROM "job_seekers"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAddEvent Create (0.4ms)[0m  [1m[32mINSERT INTO "add_events" ("event_id", "job_seeker_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["event_id", 1], ["job_seeker_id", 3], ["created_at", "2021-09-27 19:07:47.968828"], ["updated_at", "2021-09-27 19:07:47.968828"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  [1m[36mJobSeeker Load (0.2ms)[0m  [1m[34mSELECT "job_seekers".* FROM "job_seekers"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAddEvent Create (0.2ms)[0m  [1m[32mINSERT INTO "add_events" ("event_id", "job_seeker_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["event_id", 3], ["job_seeker_id", 6], ["created_at", "2021-09-27 19:07:47.975037"], ["updated_at", "2021-09-27 19:07:47.975037"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  [1m[36mJobSeeker Load (0.2ms)[0m  [1m[34mSELECT "job_seekers".* FROM "job_seekers"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAddEvent Create (0.3ms)[0m  [1m[32mINSERT INTO "add_events" ("event_id", "job_seeker_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["event_id", 4], ["job_seeker_id", 2], ["created_at", "2021-09-27 19:07:47.981660"], ["updated_at", "2021-09-27 19:07:47.981660"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  [1m[36mJobSeeker Load (0.4ms)[0m  [1m[34mSELECT "job_seekers".* FROM "job_seekers"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAddEvent Create (0.2ms)[0m  [1m[32mINSERT INTO "add_events" ("event_id", "job_seeker_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["event_id", 5], ["job_seeker_id", 6], ["created_at", "2021-09-27 19:07:47.987912"], ["updated_at", "2021-09-27 19:07:47.987912"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  [1m[36mJobSeeker Load (0.2ms)[0m  [1m[34mSELECT "job_seekers".* FROM "job_seekers"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAddEvent Create (2.4ms)[0m  [1m[32mINSERT INTO "add_events" ("event_id", "job_seeker_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["event_id", 6], ["job_seeker_id", 5], ["created_at", "2021-09-27 19:07:47.993843"], ["updated_at", "2021-09-27 19:07:47.993843"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/events" for ::1 at 2021-09-27 12:10:58 -0700
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by EventsController#index as HTML
+  [1m[36mEvent Load (0.9ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  ↳ app/controllers/events_controller.rb:8:in `index'
+Completed 200 OK in 38ms (Views: 14.7ms | ActiveRecord: 5.8ms | Allocations: 9221)
+
+
