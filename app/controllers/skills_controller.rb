@@ -15,12 +15,14 @@ class SkillsController < ApplicationController
 
   # POST /skills
   def create
-    @skill = Skill.new(skill_params)
-    if params[:user_type] == "recruiter"
-      Recruiter.all.find_by(id: params[:user_id]).add_skill(params[:name], params[:level])
-    else
-      JobSeeker.all.find_by(id: params[:user_id]).add_skill(params[:name], params[:level])
-    end
+    @skill = Skill.create(skill_params)
+    # if params[:user_type] == "recruiter"
+    #   r = Recruiter.find_by(id: params[:user_id])
+    #   r.add_skill(skill_params[:name], skill_params[:level])
+    # else
+    #   js = JobSeeker.find_by(id: params[:user_id])
+    #   js.add_skill(params[:name], params[:level])
+    # end
     
     if @skill.save
       render json: @skill, status: :created, location: @skill
@@ -46,11 +48,11 @@ class SkillsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_skill
-      @skill = Skill.find(params[:id])
+      @skill = Skill.all.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def skill_params
-      params.require(:skill).permit(:profile_id, :name, :level, :logo, :user_id, :user_type)
+      params.require(:skill).permit(:profile_id, :name, :level, :logo)
     end
 end
