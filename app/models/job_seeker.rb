@@ -82,8 +82,8 @@ class JobSeeker < ApplicationRecord
         self.all_matching_recruiters.map{|matching_recruiter| matching_recruiter.company_name}
     end
 
-    def all_matching_events
-        self.all_matching_recruiters.map{|matching_recruiter| matching_recruiter.events}.flatten.map{|event| [ event.event_date, event.location, event.recruiter.company_name, event.recruiter.name]}
+    def all_matching_events #just incase we need it
+        self.all_matching_recruiters.map{|matching_recruiter| matching_recruiter.events}.flatten.map{|event| {event_date: event.event_date, location: event.location, company_name: event.recruiter.company_name, name: event.recruiter.name}}
     end
 
     def matching_events_in_my_city #just incase we need it
