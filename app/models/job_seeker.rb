@@ -93,8 +93,13 @@ class JobSeeker < ApplicationRecord
     def all_matching_events_for_front_end
         me = self.all_matching_recruiters.map{|matching_recruiter| matching_recruiter.events}.flatten
         ge = self.events
-        ge.map{|m| me.select{|g| g.id != m.id}}.flatten
-
+        me_hash = Hash.new
+        me.map{|m| me_hash[m.id] = m}
+        ge.map{|g| if me_hash.has_key?(g.id) 
+                        me_hash.delete(g.id)
+                   end
+        }
+        me_hash.values
     end
 
     def create_profile
