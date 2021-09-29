@@ -91,7 +91,10 @@ class JobSeeker < ApplicationRecord
     end
 
     def all_matching_events_for_front_end
-        self.all_matching_recruiters.map{|matching_recruiter| matching_recruiter.events}.flatten
+        me = self.all_matching_recruiters.map{|matching_recruiter| matching_recruiter.events}.flatten
+        ge = self.events
+        ge.map{|m| me.select{|g| g.id != m.id}}.flatten
+
     end
 
     def create_profile
@@ -100,12 +103,3 @@ class JobSeeker < ApplicationRecord
 
 end
 
-# below works:
-# JobSeeker.first.profile
-# JobSeeker.first.skills
-# JobSeeker.first.events.first.recruiter
-# JobSeeker.first.events
-# JobSeeker.first.add_events
-
-# match recruiter -> job seeker
-# JobSeeker.first.events.first.recruiter.profile.skills
