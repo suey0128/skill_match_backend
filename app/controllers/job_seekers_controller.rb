@@ -15,9 +15,12 @@ class JobSeekersController < ApplicationController
 
   # POST /job_seekers
   def create
+
     @job_seeker = JobSeeker.new(job_seeker_params)
 
     if @job_seeker.save
+      profile = Profile.create!(user_id: @job_seeker.id, user_type: "JobSeeker")
+      skill = Skill.create!(name:skill_params[:name], level:skill_params[:level] , profile_id: profile.id)
       render json: @job_seeker, status: :created, location: @job_seeker
     else
       render json: @job_seeker.errors, status: :unprocessable_entity
@@ -46,6 +49,10 @@ class JobSeekersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def job_seeker_params
-      params.require(:job_seeker).permit(:name, :location, :username, :password, :email, :image)
+      params[:newUser].permit(:name, :location, :username, :password, :email, :image)
+    end
+
+    def skill_params
+      params[:newSkill].permit(:name, :level)
     end
 end

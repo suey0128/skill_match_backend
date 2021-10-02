@@ -18,6 +18,7 @@ class RecruitersController < ApplicationController
     @recruiter = Recruiter.new(recruiter_params)
 
     if @recruiter.save
+      profile = Profile.create!(user_id: @recruiter.id, user_type: "Recruiter")
       render json: @recruiter, status: :created, location: @recruiter
     else
       render json: @recruiter.errors, status: :unprocessable_entity
