@@ -70,6 +70,7 @@ class JobSeeker < ApplicationRecord
                 |recruiter| recruiter.profile.id == matching_profile_id
             }
         }.flatten #=>return the array of matching recruiter instance
+
     end
 
     def all_matching_recruiter_company_and_name
@@ -104,6 +105,12 @@ class JobSeeker < ApplicationRecord
 
     def create_profile
         Profile.create(user_id: self.id, user_type: "JobSeeker")
+    end
+
+    def all_matching_recruiters_with_skills
+        self.all_matching_recruiters.map{|r|
+            {name: r.name, company_name: r.company_name, email: r.email, id:r.id, location:r.location, logo:r.logo, username:r.username, skills: r.skills }
+        }
     end
 
 end
