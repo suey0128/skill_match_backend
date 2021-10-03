@@ -66,7 +66,13 @@ class Recruiter < ApplicationRecord
         #sort array by count-of-occurrences : https://stackoverflow.com/questions/10842210/sort-and-display-items-by-count-of-occurrences/10842419
         sorted_mactching_profile_id_arr = mactching_profile_id_arr.group_by{|x| x}.sort_by{|k, v| -v.size}.map(&:first)
         sorted_matching_recruitor_arr = sorted_mactching_profile_id_arr.map{|matching_profile_id| 
-            JobSeeker.all.select{|job_seeker| job_seeker.profile.id == matching_profile_id}}.flatten #=>return the array of matching recruiter instance
+            JobSeeker.all.select{|job_seeker| job_seeker.profile.id == matching_profile_id}
+        }.flatten #=>return the array of matching recruiter instance
+    
+        #sorted_matching_recruitor_arr_with_skills nested in
+        sorted_matching_recruitor_arr_with_skills = sorted_matching_recruitor_arr.map{|j|
+            {email: j.email, id: j.id, image: j.image, name: j.name, location: j.location, username: j.username, skills: j.skills}
+        }
     end
 
     def all_matching_job_seeker_names_and_emails
